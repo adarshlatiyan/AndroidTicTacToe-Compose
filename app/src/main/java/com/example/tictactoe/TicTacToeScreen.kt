@@ -1,5 +1,6 @@
 package com.example.tictactoe
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -12,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -108,6 +110,7 @@ fun ButtonGrid(
 
 @Composable
 fun TicTacToeBlock(modifier: Modifier = Modifier, type: TicTacToeUtils.BlockState, onclick: () -> Unit) {
+    val context = LocalContext.current
     val interactionSource = remember {
         MutableInteractionSource()
     }
@@ -117,7 +120,9 @@ fun TicTacToeBlock(modifier: Modifier = Modifier, type: TicTacToeUtils.BlockStat
                 if (type == TicTacToeUtils.BlockState.EMPTY) {
                     onclick()
                 } else {
-                    // TODO
+                    Toast
+                        .makeText(context, "This is an invalid move", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             .fillMaxHeight()
